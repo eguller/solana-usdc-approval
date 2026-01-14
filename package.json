@@ -4,8 +4,9 @@
   "private": true,
   "homepage": ".",
   "dependencies": {
-    "@solana/web3.js": "^1.87.6",
     "@solana/spl-token": "^0.3.9",
+    "@solana/web3.js": "^1.87.6",
+    "buffer": "^6.0.3",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-scripts": "5.0.1"
@@ -18,9 +19,9 @@
     "postinstall": "node postinstall.js"
   },
   "devDependencies": {
+    "customize-cra": "^1.0.0",
     "gh-pages": "^6.1.0",
-    "react-app-rewired": "^2.2.1",
-    "customize-cra": "^1.0.0"
+    "react-app-rewired": "^2.2.1"
   },
   "overrides": {
     "ajv": "6.12.6",

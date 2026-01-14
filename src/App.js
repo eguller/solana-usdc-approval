@@ -76,8 +76,16 @@ function App() {
 
       await selectedWallet.wallet.connect();
 
-      setPublicKey(window?.coinbaseSolana?.publicKey || window?.solana?.publicKey);
-      setConnected(window?.coinbaseSolana?.isConnected || window?.solana?.isConnected);
+      // After connect, publicKey is available on the wallet object
+      const walletPublicKey = selectedWallet.wallet.publicKey;
+      const isConnected = selectedWallet.wallet.isConnected;
+
+      if (!walletPublicKey) {
+        throw new Error('Unable to retrieve public key from wallet');
+      }
+
+      setPublicKey(new PublicKey(walletPublicKey));
+      setConnected(isConnected);
       setStatus({ message: `Connected to ${selectedWallet.name}!`, type: 'success' });
     } catch (error) {
       setStatus({ message: `Connection failed: ${error.message}`, type: 'error' });
