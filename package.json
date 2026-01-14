@@ -1,0 +1,48 @@
+{
+  "name": "solana-usdc-approval",
+  "version": "1.0.0",
+  "private": true,
+  "homepage": ".",
+  "dependencies": {
+    "@solana/web3.js": "^1.87.6",
+    "@solana/spl-token": "^0.3.9",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-scripts": "5.0.1"
+  },
+  "scripts": {
+    "start": "react-app-rewired start",
+    "build": "react-app-rewired build",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
+    "postinstall": "node postinstall.js"
+  },
+  "devDependencies": {
+    "gh-pages": "^6.1.0",
+    "react-app-rewired": "^2.2.1",
+    "customize-cra": "^1.0.0"
+  },
+  "overrides": {
+    "ajv": "6.12.6",
+    "ajv-keywords": "3.5.2",
+    "schema-utils": "2.7.0",
+    "terser-webpack-plugin": "4.2.3"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}
