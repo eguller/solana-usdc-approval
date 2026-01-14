@@ -11,9 +11,10 @@ import './App.css';
 const USDC_MAINNET = 'EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v';
 const USDC_DEVNET = '4zMMC9srt5Ri5X14GAgXhaHii3GnPAEERYPJgZJDncDU';
 
+// RPC endpoints - uses environment variable for custom RPC or falls back to public endpoint
 const RPC_ENDPOINTS = {
-  mainnet: 'https://api.mainnet-beta.solana.com',
-  devnet: 'https://api.devnet.solana.com'
+  mainnet: process.env.REACT_APP_SOLANA_RPC_MAINNET || 'https://api.mainnet.solana.com',
+  devnet: process.env.REACT_APP_SOLANA_RPC_DEVNET || 'https://api.devnet.solana.com'
 };
 
 function App() {

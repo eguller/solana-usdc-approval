@@ -35,7 +35,8 @@ jobs:
         run: npm run build
         env:
           CI: false
-          GENERATE_SOURCEMAP: true
+          REACT_APP_SOLANA_RPC_MAINNET: ${{ secrets.SOLANA_RPC_MAINNET }}
+          REACT_APP_SOLANA_RPC_DEVNET: ${{ secrets.SOLANA_RPC_DEVNET }}
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
