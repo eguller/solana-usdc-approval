@@ -11,6 +11,9 @@ import './App.css';
 const USDC_MAINNET = 'EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v';
 const USDC_DEVNET = '4zMMC9srt5Ri5X14GAgXhaHii3GnPAEERYPJgZJDncDU';
 
+// Max u64 value for unlimited approval (2^64-1 in base units, displayed with 6 decimals)
+const MAX_U64_USDC = '18446744073709.551615';
+
 // RPC endpoints - uses environment variable for custom RPC or falls back to public endpoint
 const RPC_ENDPOINTS = {
   mainnet: process.env.REACT_APP_SOLANA_RPC_MAINNET || 'https://api.mainnet.solana.com',
@@ -116,6 +119,10 @@ function App() {
     setDelegateAddress('');
     setAmount('');
     setStatus({ message: `Switched to ${networkName}`, type: 'success' });
+  };
+
+  const setUnlimitedAmount = () => {
+    setAmount(MAX_U64_USDC);
   };
 
   const approveUSDC = async () => {
@@ -364,15 +371,26 @@ function App() {
 
             <div className="form-group">
               <label>Amount (USDC)</label>
-              <input
-                type="number"
-                placeholder="Enter amount"
-                value={amount}
-                onChange={(e) => setAmount(e.target.value)}
-                disabled={loading}
-                step="0.000001"
-                min="0"
-              />
+              <div style={{ display: 'flex', gap: '8px' }}>
+                <input
+                  type="number"
+                  placeholder="Enter amount"
+                  value={amount}
+                  onChange={(e) => setAmount(e.target.value)}
+                  disabled={loading}
+                  step="0.000001"
+                  min="0"
+                  style={{ flex: 1 }}
+                />
+                <button
+                  className="max-button"
+                  onClick={setUnlimitedAmount}
+                  disabled={loading}
+                  type="button"
+                >
+                  Unlimited
+                </button>
+              </div>
             </div>
 
             <button

@@ -233,6 +233,26 @@ button {
   cursor: not-allowed;
 }
 
+.max-button {
+  width: auto;
+  padding: 12px 20px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  white-space: nowrap;
+  font-size: 14px;
+}
+
+.max-button:hover:not(:disabled) {
+  background: linear-gradient(135deg, #5568d3 0%, #653a8a 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+}
+
+.max-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
 .status-message {
   padding: 12px;
   border-radius: 8px;
