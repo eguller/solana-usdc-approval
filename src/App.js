@@ -166,22 +166,39 @@ function App() {
       const signedTransaction = await selectedWallet.wallet.signTransaction(transaction);
       const signature = await connection.sendRawTransaction(signedTransaction.serialize());
 
-      setStatus({
-        message: `Approval submitted! Confirming transaction...`,
-        type: 'success'
-      });
-
-      await connection.confirmTransaction(signature, 'confirmed');
-
       const explorerUrl = `https://explorer.solana.com/tx/${signature}${network === 'devnet' ? '?cluster=devnet' : ''}`;
+
       setStatus({
         message: (
           <span>
-            Approval successful! View transaction: <a href={explorerUrl} target="_blank" rel="noopener noreferrer">{signature.slice(0, 8)}...</a>
+            Approval submitted! Confirming transaction... <a href={explorerUrl} target="_blank" rel="noopener noreferrer">View on Explorer</a>
           </span>
         ),
         type: 'success'
       });
+
+      try {
+        await connection.confirmTransaction(signature, 'confirmed');
+
+        setStatus({
+          message: (
+            <span>
+              Approval successful! <a href={explorerUrl} target="_blank" rel="noopener noreferrer">View transaction</a>
+            </span>
+          ),
+          type: 'success'
+        });
+      } catch (confirmError) {
+        // Transaction was sent but confirmation timed out - still show explorer link
+        setStatus({
+          message: (
+            <span>
+              Approval submitted but confirmation timed out. <a href={explorerUrl} target="_blank" rel="noopener noreferrer">Check transaction status on Explorer</a>
+            </span>
+          ),
+          type: 'warning'
+        });
+      }
 
       setDelegateAddress('');
       setAmount('');
@@ -226,22 +243,39 @@ function App() {
       const signedTransaction = await selectedWallet.wallet.signTransaction(transaction);
       const signature = await connection.sendRawTransaction(signedTransaction.serialize());
 
-      setStatus({
-        message: `Revoke submitted! Confirming transaction...`,
-        type: 'success'
-      });
-
-      await connection.confirmTransaction(signature, 'confirmed');
-
       const explorerUrl = `https://explorer.solana.com/tx/${signature}${network === 'devnet' ? '?cluster=devnet' : ''}`;
+
       setStatus({
         message: (
           <span>
-            Revoke successful! View transaction: <a href={explorerUrl} target="_blank" rel="noopener noreferrer">{signature.slice(0, 8)}...</a>
+            Revoke submitted! Confirming transaction... <a href={explorerUrl} target="_blank" rel="noopener noreferrer">View on Explorer</a>
           </span>
         ),
         type: 'success'
       });
+
+      try {
+        await connection.confirmTransaction(signature, 'confirmed');
+
+        setStatus({
+          message: (
+            <span>
+              Revoke successful! <a href={explorerUrl} target="_blank" rel="noopener noreferrer">View transaction</a>
+            </span>
+          ),
+          type: 'success'
+        });
+      } catch (confirmError) {
+        // Transaction was sent but confirmation timed out - still show explorer link
+        setStatus({
+          message: (
+            <span>
+              Revoke submitted but confirmation timed out. <a href={explorerUrl} target="_blank" rel="noopener noreferrer">Check transaction status on Explorer</a>
+            </span>
+          ),
+          type: 'warning'
+        });
+      }
     } catch (error) {
       console.error('Revoke error:', error);
       setStatus({ message: `Revoke failed: ${error.message}`, type: 'error' });

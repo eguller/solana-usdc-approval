@@ -272,6 +272,12 @@ button {
   border: 1px solid #fca5a5;
 }
 
+.status-message.warning {
+  background: #fef3c7;
+  color: #92400e;
+  border: 1px solid #fcd34d;
+}
+
 .status-message a {
   color: inherit;
   text-decoration: underline;
